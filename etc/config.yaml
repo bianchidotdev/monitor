@@ -1,0 +1,44 @@
+checks:
+- type: shell
+  name: ls verification
+  frequency: 100 # seconds
+  shell_config:
+    command: "ls"
+    args:
+    - "-lh"
+- type: shell
+  name: pwd
+  frequency: 200
+  shell_config:
+    command: "pwd"
+    args: []
+- type: shell
+  name: sleep
+  frequency: 50
+  shell_config:
+    command: "sleep"
+    args: ["5"]
+- type: http
+  name: http 200
+  frequency: 10
+  http_config:
+    host: "httpstat.us"
+    path: "/200"
+    scheme: "https"
+    method: get
+- type: http
+  name: http 500
+  frequency: 10
+  http_config:
+    host: "httpstat.us"
+    path: "/500"
+    scheme: "https"
+    method: get
+- type: http
+  name: http timeout
+  frequency: 20
+  http_config:
+    host: "httpstat.us"
+    path: "/200?sleep=30000"
+    scheme: "https"
+    method: get
