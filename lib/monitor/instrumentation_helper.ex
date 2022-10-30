@@ -4,7 +4,7 @@ defmodule Monitor.InstrumentationHelper do
       require Logger
 
       def perform(check) do
-        Logger.debug("running with #{inspect check}")
+        Logger.debug("running with #{inspect(check)}")
         # TODO(bianchi): implement some kind of instrumentation
         run(check)
       end

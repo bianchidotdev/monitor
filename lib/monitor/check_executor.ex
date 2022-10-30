@@ -1,10 +1,16 @@
 defmodule Monitor.CheckExecutor do
   require Logger
+
   def perform(check) do
-    {:ok, module} = Monitor.Check.module(check)
-    case module.perform(check) do
-      {:ok, resp} -> handle_success(check, resp)
-      {:error, error} -> handle_failure(check, error)
+    case Monitor.Check.execution_module(check) do
+      {:ok, module} ->
+        case module.perform(check) do
+          {:ok, resp} -> handle_success(check, resp)
+          {:error, error} -> handle_failure(check, error)
+        end
+
+      {:error, error} ->
+        raise Monitor.Error, message: error
     end
   end
 

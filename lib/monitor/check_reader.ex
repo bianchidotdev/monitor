@@ -1,5 +1,4 @@
-defmodule Monitor.ConfigReader do
-
+defmodule Monitor.CheckReader do
   # TODO: other config
   # TODO: validate input
   def parse do

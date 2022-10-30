@@ -1,6 +1,7 @@
 defmodule Monitor.Application do
   use Application
   require Logger
+
   @moduledoc """
   Documentation for `Monitor`.
   """
@@ -17,11 +18,11 @@ defmodule Monitor.Application do
   @impl true
   def start(_type, _args) do
     Logger.debug("Starting Application...")
-    {:ok, checks} = Monitor.ConfigReader.parse
-    check_servers = Enum.map(checks, &Monitor.Scheduler.child_spec/1)
-    children = check_servers ++ [
-      # Starts a worker by calling: Test.Worker.start_link(arg)
-      # {Test.Worker, arg}
+
+    children = [
+      {Registry, keys: :unique, name: Monitor.CheckRegistry},
+      Monitor.CheckSupervisor,
+      Monitor.CheckFactory
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -30,3 +31,6 @@ defmodule Monitor.Application do
     Supervisor.start_link(children, opts)
   end
 end
+
+# Start Dynamic supervisor - DynamicSupervisor, name: Monitor.CheckSupervisor
+# Start check factory (uses CheckReader) -> creates workers under CheckSupervisor

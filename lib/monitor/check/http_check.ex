@@ -11,11 +11,9 @@ defmodule Monitor.Check.HttpCheck do
   }
 
   def run(check) do
-    %{"host" => host,
-      "scheme" => scheme,
-      "method" => method_string,
-      "path" => path
-      } = check.http_config
+    %{"host" => host, "scheme" => scheme, "method" => method_string, "path" => path} =
+      check.http_config
+
     url = scheme <> "://" <> host <> path
     method = @method_map[String.downcase(method_string)]
     handle_resp(HTTPoison.request(method, url))
@@ -28,7 +26,7 @@ defmodule Monitor.Check.HttpCheck do
     end
   end
 
-   defp handle_resp({:error, %HTTPoison.Error{reason: reason}}) do
+  defp handle_resp({:error, %HTTPoison.Error{reason: reason}}) do
     {:error, reason}
   end
 end

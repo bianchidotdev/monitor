@@ -1,4 +1,4 @@
-defmodule Monitor.Scheduler do
+defmodule Monitor.CheckRunner do
   use GenServer
 
   def child_spec(check) do
@@ -9,7 +9,7 @@ defmodule Monitor.Scheduler do
   end
 
   def start_link(check) do
-    GenServer.start_link(__MODULE__, check, name: String.to_atom(check.name))
+    GenServer.start_link(__MODULE__, check, name: process_name(check))
   end
 
   @impl true
@@ -27,5 +27,9 @@ defmodule Monitor.Scheduler do
   defp perform(check) do
     {:ok, _res} = Monitor.CheckExecutor.perform(check)
     check
+  end
+
+  defp process_name(check) do
+    {:via, Registry, {Monitor.CheckRegistry, "#{check.name}"}}
   end
 end

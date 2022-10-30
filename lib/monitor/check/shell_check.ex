@@ -4,6 +4,7 @@ defmodule Monitor.Check.ShellCheck do
 
   def run(check) do
     %{"command" => command, "args" => args} = check.shell_config
+
     try do
       {response, exit_code} = System.cmd(command, args, stderr_to_stdout: true)
       handle_resp(exit_code, response)
