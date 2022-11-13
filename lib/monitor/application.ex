@@ -6,15 +6,6 @@ defmodule Monitor.Application do
   Documentation for `Monitor`.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Monitor.hello()
-      :world
-
-  """
   @impl true
   def start(_type, _args) do
     children = [
@@ -46,3 +37,9 @@ end
 
 # Start Dynamic supervisor - DynamicSupervisor, name: Monitor.CheckSupervisor
 # Start check factory (uses CheckReader) -> creates workers under CheckSupervisor
+
+# Ideas
+# maybe implement the check execution as a queue instead of using the :timer.send_interval
+# maybe file all results to ETS, and trigger an event when there's a failure
+  # how handle recoveries?
+  # Add in check state to check struct or ETS

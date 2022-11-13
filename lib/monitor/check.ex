@@ -22,6 +22,3 @@ defmodule Monitor.Check do
     end
   end
 end
-
-# Ideas
-# maybe implement the check execution as a queue instead of using the :timer.send_interval
