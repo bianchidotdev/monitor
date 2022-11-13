@@ -28,8 +28,7 @@ defmodule Monitor.CheckTest do
     }
   end
 
-  test "it returns an argument error when missing required config" do
-    # TODO(bianchi): make raise error on missing args - or maybe different behavior
-    assert_raise ArgumentError, "", fn -> Monitor.Check.new(%{}) end
+  test "it is not valid when it is missing config" do
+    assert Vex.valid?(%Monitor.Check{type: nil, name: nil, frequency: nil}) == false
   end
 end

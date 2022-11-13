@@ -1,4 +1,9 @@
 defmodule Monitor.CheckExecutor do
+  @moduledoc """
+    Executes arbitrary check types - If the check runs successfully, even if it
+    fails, we return an {:ok, message} from this module because we count the check as completed.
+    Actual errors will result in an {:error, error} response
+  """
   require Logger
 
   def perform(check) do
@@ -22,7 +27,7 @@ defmodule Monitor.CheckExecutor do
 
   defp handle_failure(check, error) do
     # TODO
-    Logger.error("Failed running #{check.name} - error: #{error}")
+    Logger.warn("Failed running #{check.name} - error: #{error}")
     {:ok, error}
   end
 end

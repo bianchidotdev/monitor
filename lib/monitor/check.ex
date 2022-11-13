@@ -2,6 +2,11 @@ defmodule Monitor.Check do
   @enforce_keys [:name, :type, :frequency]
   defstruct [:name, :type, :frequency, :shell_config, :http_config]
   use ExConstructor
+  use Vex.Struct
+  # TODO(bianchi): better validations
+  validates :name, presence: true
+  validates :type, presence: true
+  validates :frequency, presence: true
 
   @callback run(any) :: {:ok, term} | {:error, String.t()}
 
@@ -17,3 +22,6 @@ defmodule Monitor.Check do
     end
   end
 end
+
+# Ideas
+# maybe implement the check execution as a queue instead of using the :timer.send_interval
