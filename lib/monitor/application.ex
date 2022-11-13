@@ -17,18 +17,30 @@ defmodule Monitor.Application do
   """
   @impl true
   def start(_type, _args) do
-    Logger.debug("Starting Application...")
-
     children = [
       {Registry, keys: :unique, name: Monitor.CheckRegistry},
-      Monitor.CheckSupervisor,
-      Monitor.CheckFactory
-    ]
+    ] ++ server_children()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Test.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp server_children do
+    if server?() do
+      Logger.info("Starting server")
+      [
+        Monitor.CheckSupervisor,
+        Monitor.CheckFactory
+      ]
+    else
+      []
+    end
+  end
+
+  defp server? do
+    Application.get_env(:monitor, :server, false)
   end
 end
 

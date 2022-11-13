@@ -1,5 +1,5 @@
 defmodule Monitor.CheckExecutorTest do
-  use ExUnit.Case#, async: true
+  use ExUnit.Case, async: true
 
   import Mox
   setup :verify_on_exit!
