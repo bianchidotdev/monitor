@@ -6,7 +6,7 @@ defmodule Monitor.MixProject do
       app: :monitor,
       version: "0.1.0",
       elixir: "~> 1.14",
-      elixirc_paths: elixirc_paths(Mix.env),
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -26,11 +26,11 @@ defmodule Monitor.MixProject do
       {:exconstructor, "~> 1.2"},
       {:httpoison, "~> 1.8"},
       {:mox, "~> 1.0", only: :test},
-      {:vex, "~> 0.9" },
+      {:vex, "~> 0.9"},
       {:yaml_elixir, "~> 2.9"}
     ]
   end
 
   defp elixirc_paths(:test), do: ["test/support", "lib"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 end

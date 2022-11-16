@@ -16,16 +16,16 @@ defmodule Monitor.CheckTest do
 
   test "it successfully creates a check with valid config" do
     assert Monitor.Check.new(@mock_check_config) == %Monitor.Check{
-      type: "http",
-      name: "fake test",
-      frequency: "10",
-      http_config: %{
-        "host" => "httpstat.us",
-        "path" => "/200",
-        "scheme" => "https",
-        "method" => "get"
-      }
-    }
+             type: "http",
+             name: "fake test",
+             frequency: "10",
+             http_config: %{
+               "host" => "httpstat.us",
+               "path" => "/200",
+               "scheme" => "https",
+               "method" => "get"
+             }
+           }
   end
 
   test "it is not valid when it is missing config" do

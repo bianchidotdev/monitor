@@ -4,9 +4,9 @@ defmodule Monitor.Check do
   use ExConstructor
   use Vex.Struct
   # TODO(bianchi): better validations
-  validates :name, presence: true
-  validates :type, presence: true
-  validates :frequency, presence: true
+  validates(:name, presence: true)
+  validates(:type, presence: true)
+  validates(:frequency, presence: true)
 
   @callback run(any) :: {:ok, term} | {:error, String.t()}
 

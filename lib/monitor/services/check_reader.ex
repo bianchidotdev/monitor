@@ -6,6 +6,7 @@ defmodule Monitor.CheckReader do
     {:ok, config} = YamlElixir.read_from_file(file, atoms: true)
     checks = Enum.map(config["checks"], &parse_check(&1))
     valid_checks = checks |> Enum.filter(&Vex.valid?/1)
+
     case valid_checks do
       [] -> {:error, checks |> Enum.map(&Vex.errors/1)}
       checks -> {:ok, checks}

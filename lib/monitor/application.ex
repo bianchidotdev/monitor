@@ -8,9 +8,10 @@ defmodule Monitor.Application do
 
   @impl true
   def start(_type, _args) do
-    children = [
-      {Registry, keys: :unique, name: Monitor.CheckRegistry},
-    ] ++ server_children()
+    children =
+      [
+        {Registry, keys: :unique, name: Monitor.CheckRegistry}
+      ] ++ server_children()
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
@@ -21,6 +22,7 @@ defmodule Monitor.Application do
   defp server_children do
     if server?() do
       Logger.info("Starting server")
+
       [
         Monitor.CheckSupervisor,
         Monitor.CheckFactory
@@ -41,5 +43,5 @@ end
 # Ideas
 # maybe implement the check execution as a queue instead of using the :timer.send_interval
 # maybe file all results to ETS, and trigger an event when there's a failure
-  # how handle recoveries?
-  # Add in check state to check struct or ETS
+# how handle recoveries?
+# Add in check state to check struct or ETS or as additional state in the GenServer
