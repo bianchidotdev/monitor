@@ -22,6 +22,7 @@ defmodule Monitor.Application do
   defp server_children do
     if server?() do
       Logger.info("Starting server")
+
       [
         Monitor.CheckSupervisor,
         Monitor.CheckFactory
