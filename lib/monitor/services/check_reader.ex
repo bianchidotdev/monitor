@@ -25,7 +25,6 @@ defmodule Monitor.CheckReader do
 
   defp parse_check(check_config) do
     check = Monitor.Check.new(check_config)
-    # Log on invalid checks
     case Vex.validate(check) do
       {:ok, check} -> check
       {:error, errors} -> raise Monitor.Error.CheckValidationError, message: inspect(errors)

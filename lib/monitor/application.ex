@@ -22,7 +22,6 @@ defmodule Monitor.Application do
   defp server_children do
     if server?() do
       Logger.info("Starting server")
-
       [
         Monitor.CheckSupervisor,
         Monitor.CheckFactory
@@ -45,3 +44,4 @@ end
 # maybe file all results to ETS, and trigger an event when there's a failure
 # how handle recoveries?
 # Add in check state to check struct or ETS or as additional state in the GenServer
+# Maybe just an ETS storage for check history and an optional Task kicked off
