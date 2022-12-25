@@ -12,7 +12,7 @@ defmodule Monitor.Check.HttpCheck do
 
   def run(check) do
     %{"host" => host, "scheme" => scheme, "method" => method_string, "path" => path} =
-      check.http_config
+      check.config
 
     url = scheme <> "://" <> host <> path
     method = @method_map[String.downcase(method_string)]

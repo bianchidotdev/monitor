@@ -1,12 +1,21 @@
 defmodule Monitor.Check do
   @enforce_keys [:name, :type, :frequency]
-  defstruct [:name, :type, :frequency, :shell_config, :http_config]
+  defstruct [
+    :name,
+    :type,
+    :frequency,
+    :config,
+    state: :healthy,
+    results: LimitedQueue.new(5, :drop_oldest)
+  ]
+
   use ExConstructor
   use Vex.Struct
-  # TODO(bianchi): better validations
+  # TODO(bianchi): validations on config
   validates(:name, presence: true)
   validates(:type, presence: true)
   validates(:frequency, presence: true)
+  validates(:state, inclusion: [:healthy, :unhealthy])
 
   @callback run(any) :: {:ok, term} | {:error, String.t()}
 

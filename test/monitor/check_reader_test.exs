@@ -5,14 +5,13 @@ defmodule Monitor.CheckReaderTest do
     [
       test_check: %Monitor.Check{
         frequency: 60,
-        http_config: %{
+        config: %{
           "host" => "httpstat.us",
           "method" => "get",
           "path" => "/200",
           "scheme" => "https"
         },
         name: "fake test",
-        shell_config: nil,
         type: "http"
       }
     ]

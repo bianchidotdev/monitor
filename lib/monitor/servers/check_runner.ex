@@ -20,13 +20,10 @@ defmodule Monitor.CheckRunner do
 
   @impl true
   def handle_info(:perform, check) do
-    perform(check)
+    {:ok, res} = Monitor.CheckExecutor.perform(check)
+    results = LimitedQueue.push(check.results, res)
+    check = %{check | results: results}
     {:noreply, check}
-  end
-
-  defp perform(check) do
-    {:ok, _res} = Monitor.CheckExecutor.perform(check)
-    check
   end
 
   defp process_name(check) do

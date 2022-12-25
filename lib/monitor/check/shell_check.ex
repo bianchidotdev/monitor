@@ -3,7 +3,7 @@ defmodule Monitor.Check.ShellCheck do
   use Monitor.InstrumentationHelper
 
   def run(check) do
-    %{"command" => command, "args" => args} = check.shell_config
+    %{"command" => command, "args" => args} = check.config
 
     try do
       {response, exit_code} = System.cmd(command, args, stderr_to_stdout: true)

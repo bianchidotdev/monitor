@@ -2,7 +2,7 @@ checks:
   - type: "http"
     name: "fake test"
     frequency: 60
-    http_config:
+    config:
       host: "httpstat.us"
       path: "/200"
       scheme: "https"

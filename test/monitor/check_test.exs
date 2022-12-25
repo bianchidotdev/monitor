@@ -6,7 +6,7 @@ defmodule Monitor.CheckTest do
     type: "http",
     name: "fake test",
     frequency: "10",
-    http_config: %{
+    config: %{
       "host" => "httpstat.us",
       "path" => "/200",
       "scheme" => "https",
@@ -19,7 +19,7 @@ defmodule Monitor.CheckTest do
              type: "http",
              name: "fake test",
              frequency: "10",
-             http_config: %{
+             config: %{
                "host" => "httpstat.us",
                "path" => "/200",
                "scheme" => "https",
