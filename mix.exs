@@ -26,9 +26,11 @@ defmodule Monitor.MixProject do
       {:exconstructor, "~> 1.2"},
       {:httpoison, "~> 1.8"},
       {:limited_queue, "~> 0.1.0"},
-      {:mox, "~> 1.0", only: :test},
       {:vex, "~> 0.9"},
-      {:yaml_elixir, "~> 2.9"}
+      {:yaml_elixir, "~> 2.9"},
+      # devtest
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 
