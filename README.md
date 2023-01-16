@@ -8,3 +8,8 @@ With a current version of elixir:
 mix deps.get
 mix monitor.server # spins up http checking server
 ```
+
+## Roadmap
+
+- [] Separate out agent and controller
+
